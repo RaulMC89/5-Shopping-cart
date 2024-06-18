@@ -1,31 +1,12 @@
-import { useEffect, useState } from "react";
-import { getProducts } from "./services/productServices"
+import { ProductsView } from "./components/ProductsView"
 
 export const CartApp = () => {
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        setProducts(getProducts());
-
-    }, []);
+    
 
     return (<>
         <div className="container">
             <h3>Cart App</h3>
-            <div className="row">
-                {products.map(product => (
-                    <div className="col-4 my-2" key={product.id}>
-                        <div className="card">
-                            <div className="card-body">
-                                <h5 className="card-title">{product.name}</h5>
-                                <p className="card-text">{product.description}</p>
-                                <p className="card-text">{product.price} €</p>
-                                <button className="btn btn-primary">Agregar</button>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </div>
+            < ProductsView/>
             <div className="my-4 w-50">
                 <h3>Carro de compras</h3>
                 <table className="table table-hover table-striped">
