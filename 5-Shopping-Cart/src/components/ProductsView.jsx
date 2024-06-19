@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import PropTypes from 'prop-types';
 import { getProducts } from "../services/productServices";
 import { ProductsItem } from "./ProductItem";
 
-export const ProductsView = () => {
+export const ProductsView = ({handler}) => {
 
     const [products, setProducts] = useState([]);
 
@@ -17,9 +18,11 @@ export const ProductsView = () => {
                 {products.map(product => (
                     <div className="col-4 my-2" key={product.id}>
                        <ProductsItem 
+                       id={product.id}
                        name={product.name} 
                        description={product.description} 
                        price={product.price} 
+                       handler={handler}
                     />
                     </div>
                 ))}
@@ -27,3 +30,6 @@ export const ProductsView = () => {
     </>);
 }
 
+ProductsView.propTypes = {
+    handler: PropTypes.func.isRequired,
+}

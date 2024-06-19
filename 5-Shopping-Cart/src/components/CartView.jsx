@@ -1,24 +1,8 @@
-import { useEffect, useState } from "react";
+import PropTypes from 'prop-types';
 
-const productItemCart =[{
-    product: {
-        id: 3,
-        name: 'Raton RGB',
-        description: 'Raton con luces RGB switches cherry red',
-        price: 33,
-    },
-    quantity: 0,
-    total: 0,
-}];
+export const CartView = ({products , handler}) => {
 
-export const CartView = () => {
-    const [productsCart, setProductsCart] =useState([]);
 
-    useEffect(() => {
-        setProductsCart(productItemCart);
-    }, [])
-
-    
     return (<>
             <h3>Carro de compras</h3>
             <table className="table table-hover table-striped">
@@ -32,13 +16,13 @@ export const CartView = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {productsCart.map(prod => (
+                    {products.map(prod => (
                         <tr key={prod.product.id}>
                             <td>{prod.product.name}</td>
                             <td>{prod.product.price}</td>
                             <td>{prod.quantity}</td>
                             <td>{prod.total}</td>
-                            <td>eliminar</td>
+                            <td><button className='btn btn-danger' onClick={() => handler(prod.product.id)}>Eliminar</button></td>
                         </tr>
                     )) }
                 </tbody>
@@ -50,4 +34,9 @@ export const CartView = () => {
                 </tfoot>
             </table>
     </>);
+}
+
+CartView.propTypes = {
+    products: PropTypes.array.isRequired,
+    handler: PropTypes.func.isRequired,
 }
