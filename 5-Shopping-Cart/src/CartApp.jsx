@@ -1,49 +1,77 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { CartView } from "./components/CartView"
 import { ProductsView } from "./components/ProductsView"
 
-const productItemCart =[{
-    product: {
-        id: 3,
-        name: 'Raton RGB',
-        description: 'Raton con luces RGB switches cherry red',
-        price: 33,
-    },
-    quantity: 2,
-    total: 0,
-},
-{
-    product: {
-        id: 4,
-        name: 'Teclado Mecanico',
-        description: 'Teclado mecanico con luces RGB switches cherry red',
-        price: 25,
-    },
-    quantity: 0,
-    total: 0,
-}];
 
 export const CartApp = () => {
-    const [productsCart, setProductsCart] =useState([]);
+    const [productsCart, setProductsCart] = useState([]);
 
-    useEffect(() => {
+    /*useEffect(() => {
         setProductsCart(productItemCart);
-    }, [])
+    }, [])*/
 
     const onDeletedProductCart = (id) => {
-        setProductsCart(productsCart.filter(prod => prod.product.id !== id));
+        const hastProduct = productsCart.find(prod => prod.product.id === id);
+        if (hastProduct && hastProduct.quantity > 1) {
+            // setProductsCart([
+            //     ...productsCart.filter(prod => prod.product.id !== id),
+            //     {
+            //         product: hastProduct.product,
+            //         quantity: hastProduct.quantity - 1,
+            //         total: (hastProduct.quantity - 1) * hastProduct.product.price,
+            //     }
+            // ]);
+
+            setProductsCart(
+                productsCart.map(prod => {
+                    if (prod.product.id === id) {
+                        prod.quantity -= 1;
+                    }
+                    return prod;
+                })
+            )
+        } else {
+            setProductsCart([
+                ...productsCart.filter(prod => prod.product.id !== id)
+            ]);
+        }
     }
-    
-    const onAddProductCart = (id,name,description,price) => {
-        setProductsCart([...productsCart, {product: {id,name,description,price},quantity: 2, total:3}]);
+
+    const onAddProductCart = (product) => {
+        const hastProduct = productsCart.find(prod => prod.product.id === product.id);
+        if (hastProduct) {
+            // setProductsCart([
+            //     ...productsCart.filter(prod => prod.product.id !== product.id),
+            //     {
+            //         product,
+            //         quantity: hastProduct.quantity + 1,
+            //     }
+            // ]);
+            setProductsCart(
+                productsCart.map(prod => {
+                    if (prod.product.id === product.id) {
+                        prod.quantity += 1;
+                    }
+                    return prod;
+                })
+            )
+        } else {
+            setProductsCart([
+                ...productsCart,
+                {
+                    product,
+                    quantity: 1,
+                }
+            ]);
+        }
     }
 
     return (<>
         <div className="container">
             <h3>Cart App</h3>
-            < ProductsView handler={onAddProductCart}/>
+            < ProductsView handler={onAddProductCart} />
             <div className="my-4 w-50">
-                <CartView products={productsCart} handler={id => onDeletedProductCart(id)}/>
+                <CartView products={productsCart} handler={id => onDeletedProductCart(id)} />
             </div>
         </div>
     </>)
