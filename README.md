@@ -27,3 +27,7 @@ Para la validacion de los props que se pasan por una expresion lambda instalamos
 - Agregar producto: he implementado mediante un map en el carro de compra si encuentra el producto actualiza la cantidad suma uno a la cantidad, devuelve un array con los productos.
 - Borrar producto: he implementado mediante un map en el carro de compra si encuentra el producto actualiza la cantidad resta uno a la cantidad, devuelve un array con los productos y si la cantidad es igual a uno mediante un filter y el spread esparcimos los productos del carro menos el que le queda uno en cantidad que coincidira con el id que pasamos por las prods.
 - Actualizar total: Calculo mediante un map para probar el total del carro del compra en el propio componente CartView.
+
+## Componente CartView desaparece, desacople calcular total
+- CartView desaàrece: Mediante un ternario simplificado si no hay objetos dentro del useState de productsCart, quita el componente y si hay algun objeto aparece.
+- Carcular total: He pasado al services el calculo del total para que pueda ser reutilizado.
