@@ -70,9 +70,13 @@ export const CartApp = () => {
         <div className="container">
             <h3>Cart App</h3>
             < ProductsView handler={onAddProductCart} />
-            <div className="my-4 w-50">
-                <CartView products={productsCart} handler={id => onDeletedProductCart(id)} />
-            </div>
+            {productsCart?.length == 0 ||
+                (
+                    <div className="my-4 w-50">
+                        <CartView products={productsCart} handler={id => onDeletedProductCart(id)} />
+                    </div>
+                )
+            }
         </div>
     </>)
 }

@@ -1,7 +1,13 @@
 import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
+import { caculateTotal } from '../services/productServices';
 
 export const CartView = ({ products, handler }) => {
+    const[total, setTotal] = useState(0);
 
+    useEffect(() => {
+        setTotal(caculateTotal(products))
+    },[products])
 
     return (<>
         <h3>Carro de compras</h3>
@@ -29,10 +35,7 @@ export const CartView = ({ products, handler }) => {
             <tfoot>
                 <tr>
                     <td colSpan="3" className="text-end fw-bold">Total</td>
-                    <td colSpan="2" className="text-start fw-bold">{
-                        products.map(prod => prod.product.price * prod.quantity)
-                            .reduce((acumulate, currentValue) => acumulate + currentValue, 0)
-                    }</td>
+                    <td colSpan="2" className="text-start fw-bold">{ total }</td>
                 </tr>
             </tfoot>
         </table>
