@@ -1,70 +1,45 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer} from "react";
 import { CartView } from "./components/CartView"
 import { ProductsView } from "./components/ProductsView"
+import { productsReducer } from "./reducer/productsReducer";
 
 const data = JSON.parse(localStorage.getItem("productCart")) || [];
 
 export const CartApp = () => {
-    const [productsCart, setProductsCart] = useState(data);
+    const [productsCart , dispatch] = useReducer(productsReducer, data);
 
     useEffect(() => {
-        setProductsCart(productsCart);
         localStorage.setItem("productCart", JSON.stringify(productsCart));
     }, [productsCart])
 
     const onDeletedProductCart = (id) => {
         const hastProduct = productsCart.find(prod => prod.product.id === id);
         if (hastProduct && hastProduct.quantity > 1) {
-            // setProductsCart([
-            //     ...productsCart.filter(prod => prod.product.id !== id),
-            //     {
-            //         product: hastProduct.product,
-            //         quantity: hastProduct.quantity - 1,
-            //         total: (hastProduct.quantity - 1) * hastProduct.product.price,
-            //     }
-            // ]);
 
-            setProductsCart(
-                productsCart.map(prod => {
-                    if (prod.product.id === id) {
-                        prod.quantity -= 1;
-                    }
-                    return prod;
-                })
-            )
+            dispatch({
+                type: 'UpdateDownQuantityProductCart',
+                payload: id,
+            })
         } else {
-            setProductsCart([
-                ...productsCart.filter(prod => prod.product.id !== id)
-            ]);
+            dispatch({
+                type: 'DeletedProductCart',
+                payload: id,
+            })
         }
     }
 
     const onAddProductCart = (product) => {
         const hastProduct = productsCart.find(prod => prod.product.id === product.id);
         if (hastProduct) {
-            // setProductsCart([
-            //     ...productsCart.filter(prod => prod.product.id !== product.id),
-            //     {
-            //         product,
-            //         quantity: hastProduct.quantity + 1,
-            //     }
-            // ]);
-            setProductsCart(
-                productsCart.map(prod => {
-                    if (prod.product.id === product.id) {
-                        prod.quantity += 1;
-                    }
-                    return prod;
-                })
-            )
+            dispatch({
+                type: 'UpdateUpQuantityProductCart',
+                payload: product,
+            })
         } else {
-            setProductsCart([
-                ...productsCart,
-                {
-                    product,
-                    quantity: 1,
-                }
-            ]);
+            dispatch({
+                type: 'AddProductCart',
+                payload: product,
+            });
         }
     }
 
