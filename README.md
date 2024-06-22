@@ -35,4 +35,6 @@ Para la validacion de los props que se pasan por una expresion lambda instalamos
 ## LocalStorage implementacion
 Para implementr la persintencia de el array de objetos del carro de complas lo he implementado a nivel de localStorage ya que asi si se cierra el navegador por error se guardara y no se perdara, se podria implenentar a nivel de sesionStorage para que solo se guarde si se actualiza el navegador no se pierdan los datos.
 
+## UseReducer implementacion
 
+Implentamos Hook useReducer para poder controlar todos los estados o funciones de añadir, actualizar, borrar producto desde un mismo lugar para facilitar el manejo del codigo y la facilita el mantenimiento y la ampliacion.
