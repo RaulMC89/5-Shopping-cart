@@ -31,3 +31,8 @@ Para la validacion de los props que se pasan por una expresion lambda instalamos
 ## Componente CartView desaparece, desacople calcular total
 - CartView desaàrece: Mediante un ternario simplificado si no hay objetos dentro del useState de productsCart, quita el componente y si hay algun objeto aparece.
 - Carcular total: He pasado al services el calculo del total para que pueda ser reutilizado.
+
+## LocalStorage implementacion
+Para implementr la persintencia de el array de objetos del carro de complas lo he implementado a nivel de localStorage ya que asi si se cierra el navegador por error se guardara y no se perdara, se podria implenentar a nivel de sesionStorage para que solo se guarde si se actualiza el navegador no se pierdan los datos.
+
+
