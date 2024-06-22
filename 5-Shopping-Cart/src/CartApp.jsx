@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CartView } from "./components/CartView"
 import { ProductsView } from "./components/ProductsView"
 
+const data = JSON.parse(localStorage.getItem("productCart")) || [];
 
 export const CartApp = () => {
-    const [productsCart, setProductsCart] = useState([]);
+    const [productsCart, setProductsCart] = useState(data);
 
-    /*useEffect(() => {
-        setProductsCart(productItemCart);
-    }, [])*/
+    useEffect(() => {
+        setProductsCart(productsCart);
+        localStorage.setItem("productCart", JSON.stringify(productsCart));
+    }, [productsCart])
 
     const onDeletedProductCart = (id) => {
         const hastProduct = productsCart.find(prod => prod.product.id === id);
