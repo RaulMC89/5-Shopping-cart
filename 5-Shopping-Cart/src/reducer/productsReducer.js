@@ -1,6 +1,8 @@
+import { ADD_PRODUCT_CART, DELETE_PRODUCT_CART, UPDATE_DOWN_QUANTITY_PRODUCT_CART, UPDATE_UP_QUANTITY_PRODUCT_CART } from "./useProductsCart";
+
 export const productsReducer = ( state = [], action) => {
     switch (action.type) {
-        case 'AddProductCart':
+        case ADD_PRODUCT_CART:
             
             return [
                 ...state,
@@ -9,7 +11,7 @@ export const productsReducer = ( state = [], action) => {
                     quantity: 1,
                 }
             ];
-        case 'UpdateUpQuantityProductCart':
+        case UPDATE_UP_QUANTITY_PRODUCT_CART:
             
             return state.map(prod => {
                 if (prod.product.id === action.payload.id) {
@@ -17,7 +19,7 @@ export const productsReducer = ( state = [], action) => {
                 }
                 return prod;
             });
-        case 'UpdateDownQuantityProductCart':
+        case UPDATE_DOWN_QUANTITY_PRODUCT_CART:
             
             return state.map(prod => {
                 if (prod.product.id === action.payload) {
@@ -25,7 +27,7 @@ export const productsReducer = ( state = [], action) => {
                 }
                 return prod;
             });
-        case 'DeletedProductCart':
+        case DELETE_PRODUCT_CART:
             
             return [
                 ...state.filter(prod => prod.product.id !== action.payload)
