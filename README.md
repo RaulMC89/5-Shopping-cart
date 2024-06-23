@@ -38,3 +38,6 @@ Para implementr la persintencia de el array de objetos del carro de complas lo h
 ## UseReducer implementacion
 
 Implentamos Hook useReducer para poder controlar todos los estados o funciones de añadir, actualizar, borrar producto desde un mismo lugar para facilitar el manejo del codigo y la facilita el mantenimiento y la ampliacion.
+
+## NavBar y Router
+- NavBar un menu superior para navegar entre las pantallas he implementado con la libreria react-router-dom y al hacer click sobre el botonn añadir producto navega hacia el carro de compras. 
