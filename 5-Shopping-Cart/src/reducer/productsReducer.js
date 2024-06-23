@@ -1,4 +1,4 @@
-import { ADD_PRODUCT_CART, DELETE_PRODUCT_CART, UPDATE_DOWN_QUANTITY_PRODUCT_CART, UPDATE_UP_QUANTITY_PRODUCT_CART } from "./useProductsCart";
+import { ADD_PRODUCT_CART, DELETE_PRODUCT_CART, UPDATE_DOWN_QUANTITY_PRODUCT_CART, UPDATE_UP_QUANTITY_PRODUCT_CART } from "./productsCart";
 
 export const productsReducer = ( state = [], action) => {
     switch (action.type) {

@@ -1,6 +1,12 @@
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 
 export const ProductsItem = ({id, name, description, price, handler}) => {
+    const navigate = useNavigate();
+    const onAddProductCart = (product) => {
+        handler(product);
+        navigate('/CartView');
+    }
     return (
         <>
             <div className="card">
@@ -8,7 +14,7 @@ export const ProductsItem = ({id, name, description, price, handler}) => {
                     <h5 className="card-title">{name}</h5>
                     <p className="card-text">{description}</p>
                     <p className="card-text">{price} €</p>
-                    <button className="btn btn-primary" onClick={() => handler({id,name,description,price})}>Agregar</button>
+                    <button className="btn btn-primary" onClick={() => onAddProductCart({id,name,description,price})}>Agregar</button>
                 </div>
             </div>
         </>)
