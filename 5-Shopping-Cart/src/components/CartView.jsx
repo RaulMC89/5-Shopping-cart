@@ -1,13 +1,19 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { caculateTotal } from '../services/productServices';
+import { useNavigate } from 'react-router-dom';
 
 export const CartView = ({ products, handler }) => {
+    const navigate = useNavigate();
     const[total, setTotal] = useState(0);
 
     useEffect(() => {
         setTotal(caculateTotal(products))
     },[products])
+
+    const onReturnProductView = () => {
+        navigate('/ProductsView');
+    }
 
     return (<>
         <h3>Carro de compras</h3>
@@ -28,7 +34,7 @@ export const CartView = ({ products, handler }) => {
                         <td>{prod.product.price}</td>
                         <td>{prod.quantity}</td>
                         <td>{prod.product.price * prod.quantity}</td>
-                        <td><button className='btn btn-danger' onClick={() => handler(prod.product.id)}>Eliminar</button></td>
+                        <td><button className='btn btn-danger' onClick={() => handler(prod.product.id)}>Deleter</button></td>
                     </tr>
                 ))}
             </tbody>
@@ -39,6 +45,7 @@ export const CartView = ({ products, handler }) => {
                 </tr>
             </tfoot>
         </table>
+        <button className='btn btn-warning' onClick={onReturnProductView}>Continue shopping</button>
     </>);
 }
 
